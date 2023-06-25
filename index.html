@@ -45,20 +45,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (currentTime >= 25 && currentTime <= 32.5) {
       botonDireccion.style.opacity = '1'; // Mostrar el botón
+      botonDireccion.disabled = false;
+
     } else {
       botonDireccion.style.opacity = '0'; // Ocultar el botón
+	    	          botonDireccion.disabled = true;
+
     }
 
     if (currentTime >= 40) {
       botonAsistencia.style.opacity = '1'; // Mostrar el botón
+	          botonAsistencia.disabled = false;
+
     } else {
       botonAsistencia.style.opacity = '0'; // Ocultar el botón
+	    	    	          botonAsistencia.disabled = true;
+
     }
   });
 
   video.addEventListener('ended', function() {
     botonDireccion.style.opacity = '0'; // Ocultar el botón
     botonAsistencia.style.opacity = '0'; // Ocultar el botón
+	      botonDireccion.disabled = true;
+	      botonAsistencia.disabled = true;
+
   });
 });
 
@@ -81,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         </div>
 
-        <a id="boton-direccion" href="https://maps.app.goo.gl/MzR4kuNyrUAPLAiR6"
+        <a id="boton-direccion" disabled href="https://maps.app.goo.gl/MzR4kuNyrUAPLAiR6"
           class="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-color-32 u-custom-font u-font-georgia u-hover-custom-color-33 u-radius-50 u-btn-1">
           <span class="u-icon"><svg class="u-svg-content"
               viewBox="0 0 54.757 54.757" x="0px" y="0px"
@@ -102,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </svg></span>&nbsp;CONFIRMAR ASISTENCIA
         </a>
 -->
-        <a id="boton-asistencia"
+        <a id="boton-asistencia" disabled
           href="https://api.whatsapp.com/send?phone=+526144645091&text=%C2%A1Hola%21+Muchas+gracias+por+la+invitaci%C3%B3n%2C+ah%C3%AD+estaremos%21%21+%F0%9F%A5%B3"
           class="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-color-32 u-custom-font u-font-georgia u-hover-custom-color-33 u-radius-50 u-btn-2">
           <span class="u-file-icon u-icon u-text-white">
