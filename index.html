@@ -4,136 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video con Botón</title>
-  <link rel="stylesheet" href="styles.css">
-
-
-  
-   <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const video = document.getElementById('myVideo');
-  const button = document.getElementById('overlayButton');
-
-  button.addEventListener('click', function () {
-    toggleFullScreen();
-  });
-
-  document.addEventListener('fullscreenchange', handleFullScreenChange);
-  document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
-  document.addEventListener('mozfullscreenchange', handleFullScreenChange);
-  document.addEventListener('MSFullscreenChange', handleFullScreenChange);
-
-  function toggleFullScreen() {
-    if (!document.fullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.msFullscreenElement) {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) {
-        video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
-    } else {
-      exitFullScreen();
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden; /* Evita que haya scroll en pantalla completa */
     }
-  }
 
-  function exitFullScreen() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
+    #video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* 100% del viewport height */
     }
-  }
 
-  function handleFullScreenChange() {
-    if (document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement) {
-      // Video en pantalla completa, ajusta el estilo del botón
-      button.style.display = 'none';
-    } else {
-      // Sale del modo de pantalla completa, restaura el estilo del botón
-      button.style.display = 'block';
+    #myVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ajusta el video para cubrir completamente el contenedor */
     }
-  }
-});
 
-  </script>
-
-  
+    #overlay-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      z-index: 1; /* Asegura que el botón esté sobre el video */
+    }
+  </style>
 </head>
-    <style>
-body {
-  margin: 0;
-}
-
-.video-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-video {
-  width: 100%;
-  height: auto;
-}
-
-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-/* Ajusta el estilo del botón en pantalla completa */
-:-webkit-full-screen #overlayButton,
-:-moz-full-screen #overlayButton,
-:-ms-fullscreen #overlayButton,
-:fullscreen #overlayButton {
-  display: none;
-}
-
-
-    </style>
 <body>
-  <div class="video-container">
-    <video id="myVideo" controls>
-      <source src="files/inv.mp4" type="video/mp4">
-      Tu navegador no soporta el tag de video.
-    </video>
-    <button id="overlayButton">Mi Botón</button>
-  </div>
-  <script src="script.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
+<div id="video-container">
+  <video id="myVideo" controls>
+    <source src="files/inv.mp4" type="video/mp4">
+    Tu navegador no soporta el tag de video.
+  </video>
+  <button id="overlay-button" onclick="alert('Haz clic en el botón azul')">Botón Azul</button>
+</div>
+
+<script>
   const video = document.getElementById('myVideo');
-  const button = document.getElementById('overlayButton');
+  const overlayButton = document.getElementById('overlay-button');
 
-  button.addEventListener('click', function () {
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
+  video.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+  video.addEventListener('fullscreenchange', handleFullscreenChange);
+
+  function handleFullscreenChange() {
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      overlayButton.style.display = 'none'; // Oculta el botón en pantalla completa
+    } else {
+      overlayButton.style.display = 'block'; // Muestra el botón cuando se sale de pantalla completa
     }
-  });
-});
+  }
+</script>
 
-    </script>
-
- 
 </body>
 </html>
-
