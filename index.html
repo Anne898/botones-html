@@ -1,209 +1,64 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="es"><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords"
-      content="¡Vamos a Celebrar!, ​Ya Solo Faltan..., ¡Acompáñanos a el día!, Te esperamos enNombre del salón, ¡No Faltes!​, Confirma tu asistencia">
-    <meta name="description" content>
-    <title>Invitación</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-    <link rel="stylesheet" href="Invitación.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer></script>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video con Botón</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+    <style>
 
-    <meta name="generator" content="Nicepage 5.11.4, nicepage.com">
+        body {
+  margin: 0;
+}
 
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+.video-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 
-    <link id="u-theme-google-font" rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+video {
+  width: 100%;
+  height: auto;
+}
 
-    <meta name="theme-color" content="#3f62f1">
-    <meta property="og:title" content="Invitación">
-    <meta property="og:description" content>
-    <meta property="og:type" content="website">
-    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
 
-    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
-    <script type="text/javascript">
+    </style>
+<body>
+  <div class="video-container">
+    <video id="myVideo" controls>
+      <source src="tu_video.mp4" type="video/mp4">
+      Tu navegador no soporta el tag de video.
+    </video>
+    <button id="overlayButton">Mi Botón</button>
+  </div>
+  <script src="script.js"></script>
 
-document.addEventListener('DOMContentLoaded', function() {
-  var video = document.querySelector('video');
-  var botonDireccion = document.getElementById('boton-direccion');
-  var botonAsistencia = document.getElementById('boton-asistencia');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+  const video = document.getElementById('myVideo');
+  const button = document.getElementById('overlayButton');
 
-  // Función para detener el video
-  function stopVideo() {
-    video.pause();
-  }
-
-  // Evento antes de descargar la página
-  window.addEventListener('beforeunload', function() {
-    stopVideo();
-  });
-
-  video.addEventListener('timeupdate', function() {
-    var currentTime = video.currentTime;
-
-    if (currentTime >= 25 && currentTime <= 31) {
-      botonDireccion.style.opacity = '1'; // Mostrar el botón
-      botonDireccion.style.pointerEvents = 'auto'; // Habilitar eventos de clic
-    } else {
-      botonDireccion.style.opacity = '0'; // Ocultar el botón
-      botonDireccion.style.pointerEvents = 'none'; // Deshabilitar eventos de clic
+  button.addEventListener('click', function () {
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
     }
-
-    if (currentTime >= 40) {
-      botonAsistencia.style.opacity = '1'; // Mostrar el botón
-      botonAsistencia.style.pointerEvents = 'auto'; // Habilitar eventos de clic
-    } else {
-      botonAsistencia.style.opacity = '0'; // Ocultar el botón
-      botonAsistencia.style.pointerEvents = 'none'; // Deshabilitar eventos de clic
-    }
-  });
-
-  video.addEventListener('ended', function() {
-    botonDireccion.style.opacity = '0'; // Ocultar el botón
-    botonDireccion.style.pointerEvents = 'none'; // Deshabilitar eventos de clic
-    botonAsistencia.style.opacity = '0'; // Ocultar el botón
-    botonAsistencia.style.pointerEvents = 'none'; // Deshabilitar eventos de clic
   });
 });
-</script>
 
-    <script>
-  var video = document.getElementById('video');
-  video.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-</script>
-
-  <style>
-        /* Tus estilos existentes permanecen sin cambios */
-
-        #video-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 177.78%; /* Relación de aspecto 9:16 (1080x1920) */
-            overflow: hidden;
-        }
-
-        #video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        #button-container {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            z-index: 1; /* Asegura que los botones estén en la capa superior */
-        }
-
-        #boton-direccion,
-        #boton-asistencia {
-            width: 48%; /* Ajusta el ancho según tu preferencia */
-            height: 35px;
-            border-radius: 25px;
-            background-color: #F4A826;
-            font-size: 12px;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
-
-
-    <style>
-        .thevideo{margin: 30px 0; position: relative;}
-        .thevideo .txt-cont{background-color: rgba(0, 0, 0, .5); width: 100%; height: 98%; display: block; position: absolute; top: 0; left: 0;}
-        .thevideo .txt-video{position: absolute; top: 50%; left:50%; transform: translate(-50%, -50%); text-align:center;}
-        .thevideo h1, .thevideo p{color:white;}
-        .thevideo .txt-video button{background-color: transparent; border:none; color: white; font-size: 30px;; padding: 5px 40px; transition: .5s;}
-        .thevideo .txt-video button:hover{background-color: rgba(255, 0, 0, .5); border-radius: 50px; cursor: pointer;}
-    </style>
-
-
-    
-</head>
-<body>
-
-    <div class="thevideo">
-        <video src="files/inv.mp4" poster="assets/video_Moment.jpg" width="100%" id="myvideo"></video>
-        <div class="txt-cont">
-            <div class="txt-video">
-                <h1>Titulo del Video o Promocion</h1>
-                <p>Informacion a promover junto al video.</p>
-                <button onclick="vidPlay()">&#9658;</button>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- 
-    <div id="video-container">
-        <video id="video" controls controlsList="nodownload">
-            <source src="files/inv.mp4" type="video/mp4">
-        </video>
-    </div>
-    <div id="button-container">
-        <a id="boton-direccion" href="https://maps.app.goo.gl/Z3Tj3x65goeBodw26">
-            <i class="fas fa-map-marker-alt"></i> VER UBICACIÓN
-        </a>
-        <a id="boton-asistencia" href="https://api.whatsapp.com/send?phone=+529988942109&text=%C2%A1Hola%21+Muchas+gracias+por+la+invitaci%C3%B3n%2C+ah%C3%AD+estaremos%21%21+%F0%9F%A5%B3">
-            <i class="fab fa-whatsapp"></i>CONFIRMARASISTENCIA
-        </a>
-    </div>-->
-
-    
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var video = document.getElementById('video');
-
-            // Entrar y salir del modo de pantalla completa al hacer clic en el video
-            video.addEventListener('click', function() {
-                if (!document.fullscreenElement) {
-                    video.requestFullscreen();
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-        });
     </script>
-    <script>
-        var theVideo = document.getElementById('myvideo'),
-            theTxt = document.querySelector('.txt-cont');
-        
-        function vidPlay(){
-            theVideo.play();
-            theVideo.setAttribute('controls', 'controls');
-            theTxt.style.opacity = "0";
-            theTxt.style.transition = "all .5s";
-            the.style.display = "none";
-        }
-        theVideo.onended = function(){
-            theTxt.style.opacity = "1";
-            theTxt.style.transition = "all .5s";
-            theTxt.style.display = "block";
-            theVideo.load();
-            theVideo.controls = false;
-        };
-    </script>
-    
 </body>
 </html>
+
