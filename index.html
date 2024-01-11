@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleFullScreen();
   });
 
-  // Escucha el evento que se dispara cuando cambia el estado de pantalla completa
   document.addEventListener('fullscreenchange', handleFullScreenChange);
   document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
   document.addEventListener('mozfullscreenchange', handleFullScreenChange);
@@ -67,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 });
+
   </script>
 
   
 </head>
     <style>
-
-        body {
+body {
   margin: 0;
 }
 
@@ -95,6 +94,15 @@ button {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
+
+/* Ajusta el estilo del botón en pantalla completa */
+:-webkit-full-screen #overlayButton,
+:-moz-full-screen #overlayButton,
+:-ms-fullscreen #overlayButton,
+:fullscreen #overlayButton {
+  display: none;
+}
+
 
     </style>
 <body>
