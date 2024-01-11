@@ -5,6 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video con Botón</title>
   <link rel="stylesheet" href="styles.css">
+
+
+  
+   <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const video = document.getElementById('myVideo');
+  const button = document.getElementById('overlayButton');
+
+  button.addEventListener('click', function () {
+    toggleFullScreen();
+  });
+
+  // Escucha el evento que se dispara cuando cambia el estado de pantalla completa
+  document.addEventListener('fullscreenchange', handleFullScreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
+  document.addEventListener('mozfullscreenchange', handleFullScreenChange);
+  document.addEventListener('MSFullscreenChange', handleFullScreenChange);
+
+  function toggleFullScreen() {
+    if (!document.fullscreenElement &&
+        !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement &&
+        !document.msFullscreenElement) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    } else {
+      exitFullScreen();
+    }
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+
+  function handleFullScreenChange() {
+    if (document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement) {
+      // Video en pantalla completa, ajusta el estilo del botón
+      button.style.display = 'none';
+    } else {
+      // Sale del modo de pantalla completa, restaura el estilo del botón
+      button.style.display = 'block';
+    }
+  }
+});
+  </script>
+
+  
 </head>
     <style>
 
@@ -59,6 +124,8 @@ button {
 });
 
     </script>
+
+ 
 </body>
 </html>
 
