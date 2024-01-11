@@ -162,6 +162,35 @@ document.addEventListener('DOMContentLoaded', function() {
       
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"
       crossorigin="anonymous"></script>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('video');
+            var buttonContainer = document.getElementById('button-container');
+
+            // Manejar cambios en el modo de pantalla completa
+            document.addEventListener('fullscreenchange', function() {
+                if (document.fullscreenElement) {
+                    // Estamos en modo de pantalla completa, ocultar los botones
+                    buttonContainer.style.display = 'none';
+                } else {
+                    // No estamos en modo de pantalla completa, mostrar los botones
+                    buttonContainer.style.display = 'flex';
+                }
+            });
+
+            // Entrar y salir del modo de pantalla completa al hacer clic en el video
+            video.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    video.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+        });
+    </script>
+
+      
   </body>
 
 </html>
